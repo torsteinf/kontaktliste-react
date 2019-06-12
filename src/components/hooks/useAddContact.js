@@ -1,19 +1,27 @@
 import { useState } from "react";
 
-const useAddContact = callback => {
-  const [inputs, setInputs] = useState({
-    fornavn: "",
-    etternavn: "",
-    gate: "",
-    postnr: "",
-    poststed: ""
-  });
+const initialState = {
+  fornavn: "",
+  etternavn: "",
+  gate: "",
+  postnr: "",
+  poststed: ""
+}
+
+const useAddContact = (callback) => {
+  
+  const [inputs, setInputs] = useState(initialState);
+
+  const clearState = () => {
+    setInputs({...initialState})
+  }
 
   const handleSubmit = event => {
     if (event) {
       event.preventDefault();
     }
-    callback();
+    callback()
+    clearState();
   };
 
   const handleInputChange = event => {
